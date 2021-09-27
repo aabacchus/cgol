@@ -15,6 +15,8 @@
 
 #include <cairo.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 struct rgb {
     double r, g, b;
@@ -26,5 +28,12 @@ struct imgdata {
     struct rgb a, i, b;   /* RGB for active, inactive, background pixels */
 };
 
+int alive(int x, int y, short *cells, int nx, int ny);
+int evolve(short *cells, int nx, int ny);
+int neighbours(int x, int y, short *cells, int nx, int ny);
+#ifdef __TEST
+int verbose_neighbours(int x, int y, short *cells, int nx, int ny);
+#endif
 /* cells[i][j] should match i = img->ny, j = img->nx */
 int png(struct imgdata *img, short *cells, char *fname);
+void randomize(short *cells, int nx, int ny);
