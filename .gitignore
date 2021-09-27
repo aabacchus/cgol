@@ -1,3 +1,4 @@
 *.o
 cgol
-out.png
+config.mk
+images/
