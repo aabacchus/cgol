@@ -2,17 +2,22 @@
 
 DEBUG = -g
 XCFLAGS = $(CFLAGS) -Wall -Wextra -Wpedantic $(DEBUG)
-CAIROFLAGS = $$(pkgconf --cflags --libs cairo)
+CAIROCFLAGS = $$(pkgconf --cflags cairo)
+CAIROLFLAGS = -lcairo
 
-BINS = \
-	   stroke
+OBJS = \
+	   image.o \
+	   main.o \
 
-all: $(BINS)
+all: cgol
 
-$(BINS): $(BINS:=.c)
-	$(CC) $(XCFLAGS) $(CAIROFLAGS) -o $@ $<
+%.o: %.c cgol.h
+	$(CC) -c $(XCFLAGS) $(CAIROCFLAGS) $<
+
+cgol: $(OBJS)
+	$(CC) $(LDFLAGS) $(CAIROLFLAGS) $(OBJS) -o cgol
 
 clean:
-	rm -f $(BINS)
+	rm -f $(OBJS) cgol
 
 .PHONY: clean
