@@ -13,6 +13,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#define _XOPEN_SOURCE 600
 #include <cairo.h>
 #include <stdio.h>
 #include <stdlib.h>

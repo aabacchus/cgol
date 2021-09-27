@@ -2,12 +2,17 @@
 
 set -e
 
+command -v pkg-config >/dev/null || {
+    printf "pkg-config not found. please set the cflags (XXCFLAGS) and ldflags (XXLDFLAGS) required for cairo in config.mk\n" >&2
+    exit 1
+}
+
 cflags() {
-    printf "XXCFLAGS = %s\n" "$(pkgconf --cflags "$@")"
+    printf "XXCFLAGS = %s\n" "$(pkg-config --cflags "$@")"
 }
 
 libs() {
-    printf "XXLDFLAGS = %s\n" "$(pkgconf --libs "$@")"
+    printf "XXLDFLAGS = %s\n" "$(pkg-config --libs "$@")"
 }
 
 exec > config.mk
