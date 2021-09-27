@@ -1,0 +1,52 @@
+.Dd September 27, 2021
+.Dt CGOL 1
+.Os "ben's space"
+.Sh NAME
+.Nm cgol
+.Nd generate images of the game of life
+.Sh SYNOPSIS
+.Nm
+.Sh DESCRIPTION
+.Nm
+generates frames of the progression of the game of life as images,
+placed into the
+.Pa images/
+directory.
+.Nm
+begins with a
+.Xr randomize 3 Ns d grid of cells,
+which are
+.Xr evolve 3 Ns d according to the following rules:
+.Bl -dash -offset indent
+.It
+A
+.Qq dead
+cell with exactly 3 neighbours becomes
+.Qq alive .
+.It
+A
+.Qq living
+cell remains living only if it has 2 or 3 neighbours.
+.It
+All other cells remain or become dead.
+.Ed
+According to these rules, the random initial state can give rise to
+some interesting behaviours.
+.Ss Creating a video from the images
+Using a tool such as
+.Xr ffmpeg 1 ,
+the following command would create a video
+.Pa out.webm
+at
+.Ar 15
+frames per second
+from the images stored in
+.Pa images/ :
+.Bd -offset indent
+ffmpeg
+.Fl r Ar 15
+.Fl i Ar images/%04d.png
+.Ar out.webm
+.Ed
+.Sh AUTHORS
+.An phoebos Aq Mt ben@bvnf.space

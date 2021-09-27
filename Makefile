@@ -24,7 +24,10 @@ $(OBJS): $(OBJS:.o=.c) cgol.h
 images:
 	mkdir -p images
 
+out.webm: images
+	ffmpeg -r 15 -i images/%04d.png $@
+
 clean:
-	rm -fr $(OBJS) cgol images/ config.mk
+	rm -fr $(OBJS) cgol images/
 
 .PHONY: clean

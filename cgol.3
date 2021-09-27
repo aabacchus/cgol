@@ -1,0 +1,41 @@
+.Dd September 27, 2021
+.Dt CGOL 3
+.Os "ben's space"
+.Sh NAME
+.Nm alive ,
+.Nm evolve ,
+.Nm neighbours ,
+.Nm png ,
+.Nm randomize
+.Nd play the game of life
+.Sh SYNOPSIS
+.In cairo/cairo.h
+.In stdio.h
+.In stdlib.h
+.In time.h
+.Fd #define WHATS_OUTSIDE 0
+.Ft int
+.Fn alive "int x" "int y" "short *cells" "int nx" "int ny"
+.Ft int
+.Fn evolve "short *cells" "int nx" "int ny"
+.Ft int
+.Fn neighbours "int x" "int y" "short *cells" "int nx" "int ny"
+.Ft int
+.Fn png "struct imgdata *img" "short *cells" "char *fname"
+.Ft void
+.Fn randomize "short *cells" "int nx" "int ny"
+.Sh DESCRIPTION
+.Bd -literal
+struct rgb {
+    double r, g, b;
+};
+.Ed
+.Bd -literal
+struct imgdata {
+    double width, height;
+    int ny, nx;           /* number of columns and rows */
+    struct gdb a, i, b;   /* RGB for active, inactive, background pixels */
+};
+.Ed
+.Sh AUTHORS
+.An phoebos Aq Mt ben@bvnf.space
