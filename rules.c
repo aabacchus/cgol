@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "cgol.h"
 
 #define WHATS_OUTSIDE 0

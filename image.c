@@ -2,6 +2,8 @@
  * image.c
  * Copyright (c) 2021 Ben Fuller
  */
+#include <cairo.h>
+#include <stdio.h>
 #include "cgol.h"
 
 /* cells[i][j]; i = img->ny; j = img->nx */

@@ -3,7 +3,7 @@
 -include config.mk
 
 DEBUG = -g
-XCFLAGS := $(CFLAGS) -Wall -Wextra -Wpedantic $(DEBUG) $(XXCFLAGS)
+XCFLAGS := $(CFLAGS) -Wall -Wextra -Wpedantic $(DEBUG) $(XXCFLAGS) -D_XOPEN_SOURCE=600
 XLDFLAGS = $(LDFLAGS) $(XXLDFLAGS)
 
 OBJS = \

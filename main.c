@@ -1,10 +1,13 @@
 /*
  * Copyright (c) 2021 Ben Fuller
  */
-#include "cgol.h"
 #include <errno.h>
 #include <string.h>
 #include <limits.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "cgol.h"
 
 #ifndef __TEST
 #define NROWS 20
