@@ -6,7 +6,7 @@
 .Nd generate images of the game of life
 .Sh SYNOPSIS
 .Nm
-.Op Ar width height Op Ar gens
+.Op Ar width height Op Ar gens | 0
 .Sh DESCRIPTION
 .Nm
 generates frames of the progression of the game of life as images,
@@ -40,6 +40,12 @@ Options:
 the width and height of the images to be printed, in pixels.
 .It Ar gens
 the number of generations to evolve. Must be 0 < gens <= 999999.
+However, if
+.Ar gens
+is 0,
+.Nm
+will run until there are 4 consecutive generations without a change
+in population.
 .El
 .Ss Creating a video from the images
 Using a tool such as

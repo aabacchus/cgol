@@ -30,6 +30,7 @@ int
 main(int argc, char **argv) {
     double width, height;
     int gens;
+    int check_births = 0;
 
     if (argc > 1 && strncmp("-h", *(argv + 1), 2) == 0) {
         fprintf(stderr, "usage: %s [width height [gens]]\nthe defaults are \"800\" \"600\" \"200\"\n", *argv);
@@ -44,6 +45,10 @@ main(int argc, char **argv) {
         if (argc > 3) {
             gens = atoi(*++argv);
             check(gens);
+            if (gens == 0) {
+                gens = 999999;
+                check_births = 1;
+            }
             if (gens < 1 || gens > 999999) {
                 /* the upper limit is to ensure the gen number fits onto the
                  * image filenames */
@@ -86,6 +91,8 @@ main(int argc, char **argv) {
 
     int gen, n_alive;
     char *fn = malloc(12 + 6);
+    int n_alive1, n_alive2, n_alive3;
+    n_alive3 = n_alive2 = n_alive1 = 0;
     for (gen = 0; gen < gens; gen++) {
 #ifdef __TEST
         printf("==> GEN %d <==\r", gen);
@@ -98,6 +105,13 @@ main(int argc, char **argv) {
             return 1;
         }
         n_alive = evolve(&cells[0][0], NCOLS, NROWS);
+        if (check_births) {
+            if (n_alive == n_alive1 && n_alive == n_alive2 && n_alive == n_alive3)
+                break;
+            n_alive3 = n_alive2;
+            n_alive2 = n_alive1;
+            n_alive1 = n_alive;
+        }
 #ifndef __TEST
         printf("%d\n", n_alive);
 #endif
