@@ -6,6 +6,7 @@
 .Nd generate images of the game of life
 .Sh SYNOPSIS
 .Nm
+.Op Ar width height Op Ar gens
 .Sh DESCRIPTION
 .Nm
 generates frames of the progression of the game of life as images,
@@ -29,9 +30,17 @@ A
 cell remains living only if it has 2 or 3 neighbours.
 .It
 All other cells remain or become dead.
-.Ed
+.El
 According to these rules, the random initial state can give rise to
 some interesting behaviours.
+.Pp
+Options:
+.Bl -tag -width Ds
+.It Ar width height
+the width and height of the images to be printed, in pixels.
+.It Ar gens
+the number of generations to evolve. Must be 0 < gens <= 999999.
+.El
 .Ss Creating a video from the images
 Using a tool such as
 .Xr ffmpeg 1 ,

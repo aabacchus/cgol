@@ -25,7 +25,7 @@ images:
 	mkdir -p images
 
 out.webm: images
-	ffmpeg -r 15 -i images/%04d.png $@
+	ffmpeg -r 15 -i images/%06d.png $@
 
 clean:
 	rm -fr $(OBJS) cgol images/
