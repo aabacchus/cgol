@@ -32,7 +32,7 @@ struct imgdata {
 int alive(int x, int y, short *cells, int nx, int ny);
 int evolve(short *cells, int nx, int ny);
 int neighbours(int x, int y, short *cells, int nx, int ny);
-#ifdef __TEST
+#ifdef __TEST_VERBOSE
 int verbose_neighbours(int x, int y, short *cells, int nx, int ny);
 #endif
 /* cells[i][j] should match i = img->ny, j = img->nx */

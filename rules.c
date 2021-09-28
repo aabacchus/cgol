@@ -12,7 +12,7 @@ evolve(short *cells, int nx, int ny) {
         for (j = 0; j < nx; j++) {
             int n = neighbours(j, i, cells, nx, ny);
             int isalive = alive(j, i, cells, nx, ny);
-#ifdef __TEST
+#ifdef __TEST_VERBOSE
             if (n) {
                 printf("%d,%d is %d and has %d neighbours\n", j, i, isalive, n);
                 verbose_neighbours(j, i, cells, nx, ny);
@@ -73,6 +73,7 @@ neighbours(int x, int y, short *cells, int nx, int ny) {
     return n;
 }
 
+#ifdef __TEST_VERBOSE
 int
 verbose_neighbours(int x, int y, short *cells, int nx, int ny) {
     int n = 0;
@@ -100,3 +101,4 @@ verbose_neighbours(int x, int y, short *cells, int nx, int ny) {
 
     return n;
 }
+#endif
