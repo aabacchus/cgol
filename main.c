@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <unistd.h>
 #include "cgol.h"
 
 #ifndef __TEST
@@ -31,14 +32,33 @@ check(int res) {
 
 int
 main(int argc, char **argv) {
+    int c;
     double width, height;
     int gens;
     int check_births = 0;
+    while ((c = getopt(argc, argv, "hw:l:g:")) != -1) {
+        switch (c) {
+            case 'h':
+                fprintf(stderr, "usage: %s [ -w width -l height -g gens]\nthe defaults are \"-w 800 -l 600 -g 200\"\n", *argv);
+                return 1;
+            case 'w':
+                errno = 0;
+                width = atof(optarg);
+                check(width);
+                break;
+            case 'l':
+                errno = 0;
+                height = atof(optarg);
+                check(height);
+                break;
 
-    if (argc > 1 && strncmp("-h", *(argv + 1), 2) == 0) {
-        fprintf(stderr, "usage: %s [width height [gens]]\nthe defaults are \"800\" \"600\" \"200\"\n", *argv);
-        return 1;
+        }
     }
+
+    argc -= optind;
+    argv += optind - 1;
+
+
     if (argc > 2) {
         errno = 0;
         width = atof(*++argv);
@@ -80,10 +100,10 @@ main(int argc, char **argv) {
 #else
     short cells[NROWS][NCOLS] = {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-        { 0, 0, 1, 0, 0, 1, 0, 0, 0, 0 },
-        { 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 },
-        { 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 },
-        { 0, 0, 0, 1, 1, 1, 1, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 1, 0, 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
+        { 0, 1, 1, 0, 0, 1, 1, 1, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
