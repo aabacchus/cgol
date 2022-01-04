@@ -7,16 +7,17 @@ XCFLAGS := $(CFLAGS) -Wall -Wextra -Wpedantic $(DEBUG) $(XXCFLAGS) -D_XOPEN_SOUR
 XLDFLAGS = $(LDFLAGS) $(XXLDFLAGS)
 
 OBJS = \
-	   image.o \
 	   main.o \
 	   rules.o \
+	   ascii.o \
+#	   image.o \
 
 all: cgol images
 
 cgol: $(OBJS)
 	$(CC) $(XLDFLAGS) $(OBJS) -o cgol
 
-$(OBJS): $(OBJS:.o=.c) cgol.h
+$(OBJS): cgol.h
 
 .c.o:
 	$(CC) -c $(XCFLAGS) $<
