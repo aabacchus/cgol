@@ -41,14 +41,8 @@ evolve(short *cells, int nx, int ny) {
 
 int
 alive(int x, int y, short *cells, int nx, int ny) {
-    if (y < 0)
-        y += ny;
-    else if (y >= ny)
-        y -= ny;
-    if (x < 0)
-        x += nx;
-    else if (x >= nx)
-        x -= nx;
+    if (y < 0 || y >= ny || x < 0 || x >= nx)
+        return WHATS_OUTSIDE;
     return (int) *(cells + y * nx + x);
 }
 
@@ -57,7 +51,19 @@ neighbours(int x, int y, short *cells, int nx, int ny) {
     int n = 0;
     int x0, y0;
     for (y0 = y - 1; y0 <= y + 1; y0++) {
+        /*
+        if (y0 < 0 || y0 >= ny) {
+            n += WHATS_OUTSIDE;
+            continue;
+        }
+        */
         for (x0 = x - 1; x0 <= x + 1; x0++) {
+            /*
+            if (x0 < 0 || x0 >= nx) {
+                n += WHATS_OUTSIDE;
+                continue;
+            }
+            */
             if (alive(x0, y0, cells, nx, ny))
                 n++;
         }
